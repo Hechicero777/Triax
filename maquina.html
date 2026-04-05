@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { margin: 0; padding: 0; background: #000; overflow: hidden; display: flex; justify-content: center; }
+        
+        /* El contenedor principal con la imagen de fondo */
+        .slot-container {
+            position: relative;
+            width: 100vw;
+            height: 177.78vw; /* Proporción 9:16 de celular */
+            max-width: 450px;
+            max-height: 800px;
+            background-image: url('URL_DE_TU_IMAGEN_AQUI');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Ventana para el CHAT (La pantalla central) */
+        .pantalla-chat {
+            position: absolute;
+            top: 35%; /* Ajusta estos % según la imagen */
+            left: 28%;
+            width: 44%;
+            height: 20%;
+            border: none;
+            background: rgba(0,0,0,0.5);
+        }
+
+        /* Botón invisible sobre el botón "SPIN" de la imagen */
+        .boton-spin {
+            position: absolute;
+            bottom: 25%;
+            left: 30%;
+            width: 40%;
+            height: 10%;
+            cursor: pointer;
+            background: rgba(255,255,255,0); /* Invisible */
+        }
+    </style>
+</head>
+<body>
+
+<div class="slot-container">
+    <iframe class="pantalla-chat" src="https://hechicero777.github.io/Triax/chat.html"></iframe>
+    
+    <div class="boton-spin" onclick="alert('¡GIRANDO DISCO DURO!')"></div>
+</div>
+
+</body>
+</html>
