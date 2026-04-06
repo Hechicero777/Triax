@@ -1,94 +1,42 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { margin: 0; padding: 0; background: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Courier New', monospace; }
+        body { margin: 0; padding: 0; background: #000; display: flex; justify-content: center; }
         
-        /* Contenedor principal: Mantiene la simetría y la proporción */
-        .slot-container {
+        .slot-machine {
             position: relative;
-            width: 90vw;
-            height: 160vw; /* Proporción 9:16 de celular */
+            width: 100vw;
+            height: 177.7vw; /* Proporción celular */
             max-width: 450px;
             max-height: 800px;
-            /* ¡OJO AQUÍ! Esta es tu imagen de fondo. */
-            background-image: url('https://raw.githubusercontent.com/Hechicero777/Triax/main/fondo.jpg');
-            background-size: contain;
-            background-position: center;
+            /* Esta línea busca la imagen 'maquina.png' en tu raíz de GitHub */
+            background-image: url('maquina.png'); 
+            background-size: 100% 100%;
             background-repeat: no-repeat;
-            box-shadow: 0 0 50px rgba(0,255,255,0.3); /* Brillo de neón */
         }
 
-        /* ----------------------------------------------------
-           Capa Media: Tus Ventanas (Iframes)
-        ---------------------------------------------------- */
-
-        /* PANTALLA PRINCIPAL (Central y Simétrica) */
-        .pantalla-central {
+        /* El hueco donde se verá el chat */
+        .visor-chat {
             position: absolute;
-            top: 31%; /* Ajusta estos % para que encajen */
-            left: 20%;
-            width: 60%;
-            height: 30%;
-            border: 2px solid #0ff; /* Marco de neón cyan */
-            background: rgba(0,0,0,0.7);
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            top: 31%; 
+            left: 18%;
+            width: 64%;
+            height: 28%;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #0ff;
         }
 
-        /* Tu chat viviendo en GitHub */
-        .chat-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* ----------------------------------------------------
-           Capa Superior: Tus Botones y Lógica
-        ---------------------------------------------------- */
-
-        /* Botón SPIN: El motor */
-        .boton-spin {
-            position: absolute;
-            bottom: 25%;
-            left: 35%;
-            width: 30%;
-            height: 8%;
-            border: none;
-            background: rgba(0,255,0,0.1); /* Ligeramente verde */
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,255,0,0.5); /* Brillo de neón verde */
-        }
-
-        .boton-spin:active {
-            box-shadow: 0 0 5px rgba(0,255,0,0.8);
-            transform: scale(0.95);
-        }
-
-        /* Pantallas de Créditos, Apuestas, etc. */
-        .display-stats {
-            position: absolute;
-            top: 25%;
-            left: 20%;
-            color: #ff0;
-            font-size: 14px;
-        }
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
 
-<div class="slot-container">
-    <div class="pantalla-central">
-        <iframe class="chat-iframe" src="https://raw.githubusercontent.com/Hechicero777/Triax/main/chat.html"></iframe>
+<div class="slot-machine">
+    <div class="visor-chat">
+        <iframe src="chat.html"></iframe>
     </div>
-
-    <div class="display-stats">CREDITS: <span id="creditos">1000</span></div>
-
-    <button class="boton-spin" onclick="alert('¡GIRANDO EL ALPHABET!')"></button>
 </div>
 
 </body>
