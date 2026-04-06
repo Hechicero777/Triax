@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        body { background: transparent; color: #0f0; font-family: 'Courier New', monospace; margin: 0; padding: 10px; overflow: hidden; }
-        .msg { font-size: 12px; text-shadow: 0 0 5px #0f0; margin-bottom: 5px; animation: fadeIn 1s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-</head>
-<body>
-    <div id="pantalla"></div>
+<div id="reacciones">
+   <div class="emoji" onclick="enviar('🌬️')">🌬️</div>
+   <div class="emoji" onclick="enviar('🍀')">🍀</div>
+   <div class="emoji" onclick="enviar('🎲')">🎲</div>
+</div>
 
-    <script>
-        async function cargarDatos() {
-            try {
-                // Buscamos tu archivo JSON (usamos el nombre directo porque están en la misma carpeta)
-                const respuesta = await fetch('chat_datos.json');
-                const datos = await respuesta.json();
-                
-                const pantalla = document.getElementById('pantalla');
-                pantalla.innerHTML = `
-                    <div class="msg">| ${datos.linea1}</div>
-                    <div class="msg">| ${datos.linea2}</div>
-                    <div class="msg" style="color: #ff0;">| ${datos.noticia}</div>
-                `;
-            } catch (e) {
-                console.log("Esperando datos...");
-            }
-        }
+<div id="muro-publico">
+   </div>
 
-        // Actualiza cada 5 segundos por si cambias el JSON en GitHub
-        setInterval(cargarDatos, 5000);
-        cargarDatos();
-    </script>
-</body>
-</html>
+<script>
+   // Aquí conectaríamos con el "Motor de Reta"
+   function enviar(emoji) {
+       // Este comando manda el emoji a todos los celulares del mundo
+       motor.publish('canal-triax', { msg: "Alguien sopló la cerbatana " + emoji });
+   }
+</script>
