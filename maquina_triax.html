@@ -3,7 +3,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        /* Bloqueo total de movimiento */
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
             overflow: hidden; background: #000; 
@@ -22,20 +21,21 @@
             background-repeat: no-repeat;
         }
 
-        /* EL CHAT INTEGRADO EN LA ZONA VERDE SUPERIOR */
+        /* CHAT EXPANDIDO (ZONA VERDE PANORÁMICA) */
         .pantalla-superior-chat {
             position: absolute;
-            top: 4.5%;    /* Justo donde empieza tu marca verde */
-            left: 14%;   /* Centrado en el panel superior */
-            width: 72%;  /* Abarca el ancho del panel */
-            height: 7.5%; /* La altura exacta de esa sección */
-            background: rgba(0, 0, 0, 0.8); /* Fondo negro con transparencia */
-            border-radius: 5px;
+            top: 2.5%;    /* Un pelín más arriba para ganar espacio */
+            left: 5%;    /* Expandido hacia la izquierda */
+            width: 90%;   /* ¡Ahora abarca casi todo el ancho! */
+            height: 10%;  /* Un poco más alto para que respire */
+            background: rgba(0, 0, 0, 0.85); 
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid rgba(0, 255, 0, 0.3); /* Un borde sutil verde */
+            border: 1px solid rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
         }
 
-        /* LA VENTANA CENTRAL (LIBRE) */
+        /* ÁREA CENTRAL (Se mantiene libre para los rodillos) */
         .pantalla-central-libre {
             position: absolute;
             top: 31.5%;
