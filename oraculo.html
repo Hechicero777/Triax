@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            background: #000; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh;
+            color: #0ff;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        /* Contenedor de la Bola */
+        .ball-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, #444, #000);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .ball-container:active { transform: scale(0.9); }
+
+        /* El visor azul triangular */
+        .visor {
+            width: 120px;
+            height: 120px;
+            background: #001a33;
+            border-radius: 50%;
+            border: 5px solid #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* La frase con efecto místico */
+        #mensaje {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4df3ff;
+            text-shadow: 0 0 10px #0ff;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .instruccion { font-size: 10px; color: #555; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="ball-container" onclick="consultarOraculo()">
+        <div class="visor">
+            <div id="mensaje">TOCA PARA TU SUERTE</div>
+        </div>
+    </div>
+
+    <div class="instruccion">CONSULTA AL ALPHABET CORE</div>
+
+    <script>
+        const frases = [
+            "EL 777 ESTÁ CERCA",
+            "SOPLA LA CERBATANA",
+            "LA RETA ES TUYA",
+            "DOBLA LA APUESTA",
+            "TU SUERTE ES HOY",
+            "SISTEMA EN RACHA",
+            "EL JACKPOT TE LLAMA",
+            "SIGUE TU INSTINTO",
+            "ENERGÍA TRIAX ALTA",
+            "EL AZAR TE ELIGIÓ"
+        ];
+
+        function consultarOraculo() {
+            const display = document.getElementById('mensaje');
+            // Efecto de desvanecido para cambiar frase
+            display.style.opacity = 0;
+            
+            setTimeout(() => {
+                const azar = Math.floor(Math.random() * frases.length);
+                display.innerText = frases[azar];
+                display.style.opacity = 1;
+            }, 300);
+        }
+    </script>
+</body>
+</html>
