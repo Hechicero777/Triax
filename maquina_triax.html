@@ -3,18 +3,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        /* Bloqueamos el movimiento del cuerpo */
         body, html { 
-            margin: 0; 
-            padding: 0; 
-            width: 100%; 
-            height: 100%; 
-            overflow: hidden; /* Evita el scroll externo */
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            touch-action: none; /* Bloquea gestos de arrastre del navegador */
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            overflow: hidden; background: #000; 
+            display: flex; justify-content: center; align-items: center; 
+            touch-action: none; 
         }
         
         .slot-machine {
@@ -28,31 +21,42 @@
             background-repeat: no-repeat;
         }
 
-        .visor-chat {
+        /* EL CHAT PRO EN LA PARTE SUPERIOR (Franja ancha) */
+        .marquesina-superior {
             position: absolute;
-            top: 31.5%; /* Ajuste fino según tu captura */
+            top: 9.5%;    /* Justo en el letrero de arriba */
+            left: 15%;   /* Centrado respecto a la máquina */
+            width: 70%;  /* Lo hacemos ancho para que se note */
+            height: 12%; /* Altura suficiente para ver varios mensajes */
+            background: rgba(0, 10, 0, 0.7); /* Fondo oscuro transparente */
+            border: 1px solid #0f0;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        /* LA PANTALLA CENTRAL (Donde estaba el chat antes, ahora queda LIBRE) */
+        .pantalla-central {
+            position: absolute;
+            top: 31.5%;
             left: 19.5%;
             width: 61%;
             height: 23%;
-            background: #000;
-            border: 1px solid #0f0;
-            overflow: hidden;
+            background: transparent; /* Libre para lo que sigue */
         }
 
-        /* El iframe sí puede tener su propio movimiento interno si el chat crece */
-        iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: none; 
-        }
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
 
 <div class="slot-machine">
-    <div class="visor-chat">
-        <iframe src="chat.html"></iframe>
+    <div class="marquesina-superior">
+        <iframe src="chat_pro.html"></iframe>
     </div>
+
+    <div class="pantalla-central">
+        </div>
 </div>
 
 </body>
