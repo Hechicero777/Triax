@@ -3,96 +3,88 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        body { margin: 0; padding: 0; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; color: #0f0; font-family: 'Courier New', monospace; overflow: hidden; }
-        
-        /* El marco de neón de la ruleta */
-        .contenedor-ruleta { position: relative; width: 280px; height: 280px; border-radius: 50%; border: 8px solid #0ff; box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); display: flex; justify-content: center; align-items: center; }
+        body { 
+            margin: 0; padding: 0; background: transparent; 
+            display: flex; justify-content: center; align-items: center; 
+            height: 100vh; overflow: hidden; font-family: 'Courier New', monospace;
+        }
 
-        /* La flecha indicadora superior */
-        .flecha { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #ff0; z-index: 10; filter: drop-shadow(0 0 5px #ff0); }
+        /* El Botón Maestro */
+        .lucky-button {
+            position: relative;
+            width: 120px; height: 120px;
+            background: #000;
+            border: 4px solid #0f0;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 20px #0f0, inset 0 0 15px #0f0;
+            animation: pulse 1.5s infinite;
+            transition: all 0.2s;
+        }
 
-        /* El disco que gira */
-        .disco { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#000 0% 12.5%, #111 12.5% 25%, #000 25% 37.5%, #111 37.5% 50%, #000 50% 62.5%, #111 62.5% 75%, #000 75% 87.5%, #111 87.5% 100%); transition: transform 4s cubic-bezier(0.2, 0.8, 0.3, 1); /* Física de desaceleración */ border: 2px solid #333; position: relative; overflow: hidden; }
+        /* Animación de Respiración de Neón */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 10px #0f0, inset 0 0 5px #0f0; }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px #0f0, inset 0 0 20px #0f0; }
+            100% { transform: scale(1); box-shadow: 0 0 10px #0f0, inset 0 0 5px #0f0; }
+        }
 
-        /* Estilo de los números/premios */
-        .numero { position: absolute; width: 50%; height: 50%; transform-origin: bottom right; bottom: 50%; right: 50%; display: flex; justify-content: center; align-items: start; padding-top: 15px; font-weight: bold; font-size: 16px; color: #4df3ff; text-shadow: 0 0 5px #0ff; }
+        /* El ícono que aparece */
+        #icon-display {
+            font-size: 50px;
+            color: #fff;
+            text-shadow: 0 0 10px #fff, 0 0 20px #0f0;
+            filter: brightness(1.5);
+            user-select: none;
+        }
 
-        /* Posicionamiento radial de los 8 sectores */
-        .num1 { transform: rotate(22.5deg); } .num2 { transform: rotate(67.5deg); }
-        .num3 { transform: rotate(112.5deg); } .num4 { transform: rotate(157.5deg); }
-        .num5 { transform: rotate(202.5deg); } .num6 { transform: rotate(247.5deg); }
-        .num7 { transform: rotate(292.5deg); } .num8 { transform: rotate(337.5deg); }
+        /* Efecto de destello al presionar */
+        .lucky-button:active {
+            transform: scale(0.9);
+            background: #0f0;
+            box-shadow: 0 0 60px #0f0;
+        }
 
-        /* Botón central "SPIN" */
-        .boton-spin { position: absolute; width: 70px; height: 70px; background: #000; border: 4px solid #ff0; border-radius: 50%; color: #ff0; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 5; box-shadow: 0 0 15px rgba(255, 255, 0, 0.3); text-shadow: 0 0 5px #ff0; transition: transform 0.1s; }
-        .boton-spin:active { transform: scale(0.9); box-shadow: 0 0 5px #ff0; }
+        .lucky-button:active #icon-display {
+            color: #000;
+            text-shadow: none;
+        }
 
-        /* Pantalla de resultados */
-        .display { margin-top: 20px; font-size: 18px; color: #ff0; height: 25px; text-shadow: 0 0 10px #ff0; }
+        /* Etiqueta inferior */
+        .label {
+            position: absolute; bottom: -30px;
+            color: #0f0; font-size: 12px; font-weight: bold;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="contenedor-ruleta">
-        <div class="flecha"></div>
-        <div class="boton-spin" onclick="girar()">SPIN</div>
-        
-        <div class="disco" id="disco">
-            <div class="numero num1">10X</div>
-            <div class="numero num2">🍀</div>
-            <div class="numero num3">1X</div>
-            <div class="numero num4">2X</div>
-            <div class="numero num5">0X</div>
-            <div class="numero num6">3X</div>
-            <div class="numero num7">5X</div>
-            <div class="numero num8">FREESPIN</div>
-        </div>
+    <div class="lucky-button" onclick="lanzarSuerte()">
+        <div id="icon-display">?</div>
+        <div class="label">TRIAX SPIN</div>
     </div>
 
-    <div class="display" id="resultado">TOCA SPIN PARA PROBAR TU SUERTE</div>
-
     <script>
-        // Los premios en orden (del sector 1 al 8)
-        const premios = ["10X MULTIPLIER", "🍀 GOOD LUCK", "1X CREDITS", "2X CREDITS", "0X (BOOM)", "3X CREDITS", "5X CREDITS", "FREESPIN ACTIVO"];
-        let girando = false;
-        let anguloActual = 0;
+        const iconos = ["💎", "🎰", "7️⃣", "🎲", "🍒", "🍀", "💰", "🃏", "👑", "🔥", "🌬️"];
 
-        function girar() {
-            if (girando) return; // Evita múltiples clics
-            girando = true;
+        function lanzarSuerte() {
+            const display = document.getElementById('icon-display');
             
-            const disco = document.getElementById('disco');
-            const display = document.getElementById('resultado');
-            
-            display.innerText = "GIRANDO EL AZAR...";
-            
-            // Calculamos un giro aleatorio grande (mínimo 5 vueltas + ángulo al azar)
-            const vueltasMinimas = 1800; // 5 vueltas (360 * 5)
-            const anguloAleatorio = Math.floor(Math.random() * 360);
-            const giroTotal = anguloActual + vueltasMinimas + anguloAleatorio;
-            
-            // Guardamos el ángulo para el próximo giro
-            anguloActual = giroTotal;
-            
-            // Aplicamos la rotación con la física de la CSS transition
-            disco.style.transform = `rotate(${giroTotal}deg)`;
-            
-            // Esperamos 4 segundos (lo que tarda la animación) para dar el premio
-            setTimeout(() => {
-                girando = false;
+            // Efecto de "ruleteo" rápido (cambia iconos a mil por hora)
+            let vueltas = 0;
+            const intervalo = setInterval(() => {
+                display.innerText = iconos[Math.floor(Math.random() * iconos.length)];
+                vueltas++;
                 
-                // Calculamos qué premio quedó bajo la flecha (arriba)
-                // El ángulo final real es el residuo de 360 grados
-                const anguloFinalValido = anguloAleatorio;
-                
-                // Dividimos 360 grados entre 8 sectores (45 grados por sector)
-                // Usamos 360 - ángulo porque la flecha está fija arriba y el disco gira a la derecha
-                const indicePremio = Math.floor(((360 - anguloFinalValido) % 360) / 45);
-                
-                display.innerText = `¡GANASTE: ${premios[indicePremio]}!`;
-                
-                // Aquí podrías integrar un sonido de victoria o actualizar créditos
-            }, 4000);
+                if (vueltas > 15) {
+                    clearInterval(intervalo);
+                    // Resultado final con brillo extra
+                    display.style.filter = "hue-rotate(90deg)";
+                    setTimeout(() => display.style.filter = "brightness(1.5)", 200);
+                }
+            }, 50);
         }
     </script>
 </body>
