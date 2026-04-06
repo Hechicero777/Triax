@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
+        /* Congelamos el fondo para que no se mueva */
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
             overflow: hidden; background: #000; 
@@ -13,7 +14,7 @@
         .slot-machine {
             position: relative;
             width: 100vw;
-            height: 177.7vw; 
+            height: 177.7vw; /* Proporción 9:16 */
             max-width: 450px;
             max-height: 800px;
             background-image: url('maquina.png'); 
@@ -21,27 +22,31 @@
             background-repeat: no-repeat;
         }
 
-        /* CHAT EXPANDIDO (ZONA VERDE PANORÁMICA) */
+        /* ----------------------------------------------------
+           EL CHAT INTEGRADO (Debajo del Neón Azul)
+        ---------------------------------------------------- */
         .pantalla-superior-chat {
             position: absolute;
-            top: 2.5%;    /* Un pelín más arriba para ganar espacio */
-            left: 5%;    /* Expandido hacia la izquierda */
-            width: 90%;   /* ¡Ahora abarca casi todo el ancho! */
-            height: 10%;  /* Un poco más alto para que respire */
-            background: rgba(0, 0, 0, 0.85); 
+            top: 22.5%;    /* Bajado para dejar ver el neón azul */
+            left: 5%;    /* Expandido al 90% del ancho */
+            width: 90%;   /* Formato Ultra-Wide */
+            height: 8%;  /* Altura perfecta para 2-3 mensajes */
+            background: rgba(0, 0, 0, 0.85); /* Negro casi opaco */
             border-radius: 8px;
             overflow: hidden;
-            border: 1px solid rgba(0, 255, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.5); /* Borde verde sutil */
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
         }
 
-        /* ÁREA CENTRAL (Se mantiene libre para los rodillos) */
+        /* ----------------------------------------------------
+           ÁREA CENTRAL (Se mantiene LIBRE)
+        ---------------------------------------------------- */
         .pantalla-central-libre {
             position: absolute;
-            top: 31.5%;
+            top: 35.5%; /* Bajado un poco para dar aire */
             left: 19.5%;
             width: 61%;
-            height: 23%;
+            height: 19%;
             background: transparent;
         }
 
